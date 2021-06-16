@@ -1,134 +1,132 @@
-// diffメソッドを使って、現時刻と2017年7月1日の日時の差を、ミリ秒で取得
+// // // // // // フロー確認
+// // // // // // 数字を入力
+// // // // // // 入力された数字を取得
+// // // // // // コンピュータが生成したランダムな数字と比較
+// // // // // // 桁数が合っていればEATと出力
+// // // // // // 使われている数字があっていればいいBITEと表示
+// // // // // // ぴったりだったら正解の表示
 
-// // 1秒おきにカウントダウン
+const remainTurn = document.getElementById('remainTurn');
+// remainTurn = 0;
+let i = 10;
+let z = 0;
+remainTurn.textContent = `あと${i}回です`
 
-// const wri = document.createElement("p");
-// document.body.appendChild(wri);
-// let cnt = sec;
-// wri.textContent = `ドラえもんが生まれるまであと${cnt}日`;
-// let id = setInterval(function () {
+const ansNum = new Array(3);
+function initAnsNum() {
+    ansNum[0] = Math.floor(Math.random() * 10);
+    do {
+        ansNum[1] = Math.floor(Math.random() * 10);
+    } while (ansNum[0] === ansNum[1]);
+    do {
+        ansNum[2] = Math.floor(Math.random() * 10);
+    } while (ansNum[0] === ansNum[2] || ansNum[1] === ansNum[2]);
+}
 
-// const wri = document.createElement("p");
-// document.body.appendChild(wri);
-// let cnt = sec;
-// wri.textContent = `ドラえもんが生まれるまであと${cnt}日`;
-// const body = document.getElementById('body');
-const rew = document.createElement('p');
-document.body.appendChild(rew);
-setInterval(() => {
-    const diff = moment('2112-03-09').diff(moment());
+initAnsNum();
+// console.log(cpuans);
 
-    // ミリ秒からdurationオブジェクトを生成
-    const duration = moment.duration(diff);
+let isFinish = false;
+// const pat = /^\d{3}$/
 
-    // 日・時・分・秒を取得
-    const days = Math.floor(duration.asDays()),
-        hours = duration.hours(),
-        minutes = duration.minutes(),
-        seconds = duration.seconds();
+// while (!isFinish) {
+//     // ゲームループ処理
+//     console.log("予想数値を入力");
+//     let input = require('fs').readFileSync('/dev/stdin', 'UTF-8');
+let numCheck = document.getElementById('numCheck');
 
-    // 出力
-    console.log(`ドラえもんが生まれるまで${days}日と${hours}時間${minutes}分${seconds}秒`);
-    rew.textContent = `ドラえもんが生まれるまであと${days}日と${hours}時間${minutes}分${seconds}秒`;
+numCheck.addEventListener('click', () => {
+    let answerNum = document.getElementById('answerNum');
+    let input = answerNum.value;
+    console.log(answerNum.value);
 
-}, 1000);
+    if ((input.length <= 2 || input.length >= 4) && (input[0] === input[1] || input[0] === input[2] || input[1] === input[2])) {
+        // console.log("3桁の数値を入力してください。");
+        // alert("3桁の数値を入力してください。");
+        alert('数字は3桁でそれぞれ別の数をオネシャス！');
+        // input = "";
+        answerNum.value = '';
+        //         continue;
+    } else if (input.length <= 2 || input.length >= 4) {
+        // console.log("3桁の数値を入力してください。");
+        // alert("3桁の数値を入力してください。");
+        alert('数字は3桁でオネシャス！');
+        // input = "";
+        answerNum.value = '';
+        //         continue;
+    } else if (input[0] === input[1] || input[0] === input[2] || input[1] === input[2]) {
+        // console.log("異なる3桁の数値を入力してください。");
+        alert("異なる3桁の数値を入力してください。");
+        answerNum.value = '';
+        //         continue;
+    } else {
 
+        let eat = 0;
+        let bite = 0;
+        for (let i = 0; i < input.length; i++) {
+            for (let j = 0; j < ansNum.length; j++) {
+                if (input[i] == ansNum[j]) {
+                    if (i === j) {
+                        eat = eat + 1;
+                    } else {
+                        bite = bite + 1;
+                    };
+                };
+            };
+        };
+        // console.log(`${eat} EAT, ${bite} BITE`);
 
-// let v = moment('2018-12-25', 'YYYY-MM-DD').diff(moment('2017-12-25', 'YYYY-MM-DD'), 'days'); // => 365
-// wri.textContent = v;
+        // alert(`${eat} EAT, ${bite} BITE`);
+        answerNum.value = '';
 
-// カウントダウンする秒数
-// let sec = 180;
+        if (eat != 3) {
+            // console.log("正解です。おめでとう！");
+            alert(`${eat} EAT, ${bite} BITE`);
+            answerNum.value = '';
+            z += 1;
+            i = i - z;
 
-// // 開始日時を設定
-// // let dt = new Date();
-// let dt = moment().format('MMMM Do YYYY, h:mm:ss a');
-// console.log("Start: ", dt);
-// // 終了時刻を開始日時+カウントダウンする秒数に設定
-// let endDt = new Date(dt.getTime() + sec * 1000);
-// console.log("End : ", endDt);
-
-// // カウントダウンする秒数
-// let sec = 180;
-
-// // 開始日時を設定
-// let dt = new Date();
-// // let dt = new Date(年, 月, 日, 時, 分, 秒);
-// // console.log("Start: ", dt);
-// // 終了時刻を開始日時+カウントダウンする秒数に設定
-// let endDt = new Date(dt.getTime() + sec * 1000);
-// console.log("End : ", endDt);
-
-// const wri = document.createElement("p");
-// document.body.appendChild(wri);
-// // 1秒おきにカウントダウン
-// let cnt = sec;
-// let id = setInterval(function () {
-
-//     wri.textContent = `ドラえもんが生まれるまであと${cnt}日`;
-
-//     // console.log(cnt);
-//     cnt--;
-//     // 現在日時と終了日時を比較
-//     dt = new Date();
-//     if (dt.getTime() >= endDt.getTime()) {
-//         clearInterval(id);
-//         console.log("Finish!");
+            remainTurn.textContent = `あと${i}回です`;
+            z = 0;
+            // i = i;
+            // alert("正解です。おめでとう！");
+            answerNum.value = '';
+        };
+        if (eat === 3) {
+            // console.log("正解です。おめでとう！");
+            alert("正解です。おめでとう！");
+            answerNum.value = '';
+        };
+        console.log(ansNum);
+        // remainTurn.textContent = ansNum;
+    };
+})
+    //     input = input.slice(0, input.length - 1);
+    //     if (!pat.test(input)) {
+        //         console.log("3桁の数値を入力してください。");
+        //         continue;
+        //     }
+        //     if (input[0] === input[1] || input[0] === input[2] || input[1] === input[2]) {
+            //         console.log("異なる3桁の数値を入力してください。");
+            //         continue;
 //     }
-// }, 1000);
 
-// //カウントダウンの終了日時を指定
-// const EndTime = new Date("2112/9/3 23:59:59");
-// //タイマーを表示する要素
-// // const wri = document.getElementById("count_down_timer");
-
-
-// const wri = document.createElement("p");
-// document.body.appendChild(wri);
-
-// function displayTime(diff) {
-//     if (diff > 0) {
-//         wri.textContent = `ドラえもんが生まれるまであと  ${d}  日  ${h}  時間  ${m} 分${s} 秒`;
-//     }
-//     else {
-//         wri.textContent = '締め切りました。';
+    // let eat = 0;
+    // let bite = 0;
+    // for (let i = 0; i < input.length; i++) {
+    //     for (let j = 0; j < ansNum.length; j++) {
+    //         if (input[i] == ansNum[j]) {
+    //             if (i === j) {
+    //                 eat = eat + 1;
+    //             } else {
+    //                 bite = bite + 1;
+    //             }
+    //         }
+    //     }
+    // }
+    // console.log(`${eat} EAT, ${bite} BITE`);
+    // if (eat === 3) {
+    //     console.log("正解です。おめでとう！");
+//         isFinish = true;
 //     }
 // }
-// function calcRemainingTime() {
-//     //現在日時を取得
-//     const NowTime = new Date();
-//     //差分
-//     const diff = EndTime - NowTime;
-//     //計算
-//     d = Math.floor(diff / (24 * 60 * 60 * 1000));
-//     h = Math.floor(diff / (60 * 60 * 1000)) % 24;
-//     m = Math.floor(diff / (60 * 1000)) % 24 % 60;
-//     s = Math.floor(diff / 1000) % 24 % 60 % 60;
-//     //表示
-//     displayTime(diff);
-// };
-
-// // const tfunc = function (function name(params) {
-
-// // }() {
-// //     //現在日時を取得
-// //     const NowTime = new Date();
-// //     //差分
-// //     const diff = EndTime - NowTime;
-// //     //計算
-// //     d = Math.floor(diff / (24 * 60 * 60 * 1000));
-// //     h = Math.floor(diff / (60 * 60 * 1000)) % 24;
-// //     m = Math.floor(diff / (60 * 1000)) % 24 % 60;
-// //     s = Math.floor(diff / 1000) % 24 % 60 % 60;
-// //     //表示
-// //     displayTime(diff);
-// // }, 1000);
-// calcRemainingTime();
-// setInterval(calcRemainingTime, 1000);
-
-// let require;
-// kopipe
-// const moment = require('moment');
-// const mo = moment().format('MMMM Do YYYY, h:mm:ss a'); // 6月 13日 2021, 8:25:19 午前
-
-// console.log(mo);
