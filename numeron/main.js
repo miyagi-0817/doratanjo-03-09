@@ -15,9 +15,13 @@ remainTurn.textContent = `あと${i}回です`
 const ansNum = new Array(3);
 function initAnsNum() {
     ansNum[0] = Math.floor(Math.random() * 10);
+    console.log(ansNum[0])
+
     do {
         ansNum[1] = Math.floor(Math.random() * 10);
     } while (ansNum[0] === ansNum[1]);
+
+    console.log(ansNum[1])
     do {
         ansNum[2] = Math.floor(Math.random() * 10);
     } while (ansNum[0] === ansNum[2] || ansNum[1] === ansNum[2]);
@@ -74,6 +78,7 @@ numCheck.addEventListener('click', () => {
                 };
             };
         };
+
         // console.log(`${eat} EAT, ${bite} BITE`);
 
         // alert(`${eat} EAT, ${bite} BITE`);
